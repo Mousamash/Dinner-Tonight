@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, jsonify
 from transformers import pipeline
 import random
+import gc  # For garbage collection
 
 app = Flask(__name__)
 
-# Initialize with GPT-Neo model (better quality than distilgpt2)
-generator = pipeline('text-generation', model='EleutherAI/gpt-neo-125M')
+# Initialize with a smaller model
+generator = pipeline('text-generation', model='distilgpt2', device=-1)  # device=-1 forces CPU usage
+
+# Clear memory after model load
+gc.collect()
 
 PREFERENCE_OPTIONS = {
     'career': [
