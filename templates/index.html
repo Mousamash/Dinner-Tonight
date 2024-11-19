@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DinnerTonight - Bio Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>DinnerTonight</h1>
+        <h2>Dating Profile Bio Generator</h2>
+        
+        <form id="bioForm">
+            <div class="preference-section">
+                <label for="career">Career:</label>
+                <select id="career" name="career" required>
+                    <option value="">Select a career...</option>
+                    {% for career in preferences.career %}
+                    <option value="{{ career }}">{{ career }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="preference-section">
+                <label for="personality">Personality:</label>
+                <select id="personality" name="personality" required>
+                    <option value="">Select a personality trait...</option>
+                    {% for trait in preferences.personality %}
+                    <option value="{{ trait }}">{{ trait }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="preference-section">
+                <label for="interests">Interests:</label>
+                <select id="interests" name="interests" required>
+                    <option value="">Select an interest...</option>
+                    {% for interest in preferences.interests %}
+                    <option value="{{ interest }}">{{ interest }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="preference-section">
+                <label for="relationship_goals">Relationship Goals:</label>
+                <select id="relationship_goals" name="relationship_goals" required>
+                    <option value="">Select relationship goals...</option>
+                    {% for goal in preferences.relationship_goals %}
+                    <option value="{{ goal }}">{{ goal }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Generate Bio</button>
+        </form>
+
+        <div id="result" class="hidden">
+            <h3>Your Generated Bio:</h3>
+            <p id="generatedBio"></p>
+            <button id="regenerateBtn" class="hidden">Generate Another</button>
+        </div>
+
+        <div id="loading" class="hidden">
+            Generating your bio...
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
